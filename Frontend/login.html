@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Wedding Hall Management</title>
+    <script src="./assets/js/TailWind3.4.16.js"></script>
+    <!-- SweetAlert2 -->
+    <script src="./assets/js/sweetalert2@11.js"></script>
+    <link href="./assets/fontawesome/css/fontawesome.css" rel="stylesheet" />
+    <link href="./assets/fontawesome/css/brands.css" rel="stylesheet" />
+    <link href="./assets/fontawesome/css/solid.css" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2c5282',
+                        primaryDark: '#1a365d',
+                        secondary: '#ebf8ff',
+                        accent: '#bee3f8',
+                        dark: '#2b6cb0',
+                        light: '#90cdf4',
+                        text: '#1a202c'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Fixed image path */
+            background: url('./assets/images/Login.png') no-repeat center center fixed;
+            background-size: cover;
+            /* Fallback background */
+            background-color: #D4A373;
+        }
+
+        .login-container {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.7);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+    <div class="login-container w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-white/20">
+        <div class="p-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-primary mb-2">Welcome Back</h1>
+                <p class="text-gray-600">Login to manage wedding events</p>
+            </div>
+
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <i class="fas fa-envelope text-gray-400"></i>
+                        </div>
+                        <input type="email" id="email" name="email" required
+                            class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition"
+                            placeholder="example@email.com">
+                    </div>
+                    <p id="emailError" class="mt-1 text-sm text-red-600 hidden"></p>
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                            <i class="fas fa-lock text-gray-400"></i>
+                        </div>
+                        <input type="password" id="password" name="password" required
+                            class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary transition"
+                            placeholder="••••••••">
+                    </div>
+                    <p id="passwordError" class="mt-1 text-sm text-red-600 hidden"></p>
+                </div>
+
+                <button type="submit"
+                    class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition">
+                    Login
+                    <span id="loadingSpinner" class="hidden ml-2">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Override the redirect behavior in LoginAuth.js
+        const originalLoginSubmit = document.getElementById('loginForm').onsubmit;
+        
+        document.getElementById('loginForm').onsubmit = async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            document.getElementById('loadingSpinner').classList.remove('hidden');
+            
+            // Hide previous errors
+            document.getElementById('emailError').classList.add('hidden');
+            document.getElementById('passwordError').classList.add('hidden');
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch(`${base_url}/api/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                if (response.status === 429) {
+                    // Rate limiting handling
+                    const retryAfter = response.headers.get('Retry-After') || 30;
+                    await Swal.fire({
+                        title: 'Too Many Attempts',
+                        html: `
+                            <div class="text-center">
+                                <p>Please wait <strong>${retryAfter}</strong> seconds before trying again.</p>
+                                <div class="mt-4 flex justify-center">
+                                    <div class="w-3/4 bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-primary h-2.5 rounded-full" 
+                                            style="width: 0%" id="rateLimitProgress">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `,
+                        icon: 'error',
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#D4A373',
+                        allowOutsideClick: false,
+                        showConfirmButton: false,
+                        timer: retryAfter * 1000,
+                        timerProgressBar: false,
+                        didOpen: () => {
+                            const progressBar = document.getElementById('rateLimitProgress');
+                            let width = 0;
+                            const interval = setInterval(() => {
+                                width += 100 / retryAfter;
+                                progressBar.style.width = `${width}%`;
+                                if (width >= 100) clearInterval(interval);
+                            }, 1000);
+                        },
+                        willClose: () => {
+                            document.getElementById('email').focus();
+                        }
+                    });
+                    return;
+                }
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    // Store data in localStorage
+                    localStorage.removeItem('token');
+                    localStorage.setItem('token', data.token);
+                    localStorage.setItem('userData', JSON.stringify(data.user));
+                    
+                    // Show success message
+                    await Swal.fire({
+                        title: 'Access Granted',
+                        html: `
+                            <div class="text-center">
+                                <p class="mb-2">Welcome <strong>${data.user.name}</strong>!</p>
+                                <p class="text-sm text-gray-600">${data.user.role} privileges activated</p>
+                            </div>
+                        `,
+                        icon: 'success',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Enter Dashboard',
+                        confirmButtonColor: '#2c5282',
+                        timer: 3000,
+                        timerProgressBar: true,
+                        willClose: () => {
+                            // FIXED: Changed to relative path
+                            window.location.href = 'Dashboard.html';
+                        }
+                    });
+                } else {
+                    // Handle different error types with specific messages
+                    let errorTitle = 'Login Failed';
+                    let errorText = 'Please check your credentials and try again.';
+                    let errorIcon = 'error';
+                    
+                    if (data.errors) {
+                        const emailError = data.errors.find(err => err.path === 'email');
+                        if (emailError) {
+                            errorTitle = 'Invalid Email';
+                            errorText = `
+                                <div class="text-left">
+                                    <p>• ${emailError.msg}</p>
+                                    <p class="mt-1 text-sm">Example: user@weddinghall.com</p>
+                                </div>
+                            `;
+                        }
+                    } else if (data.error === 'Invalid credentials') {
+                        errorTitle = 'Access Denied';
+                        errorText = 'The password you entered is incorrect.';
+                        errorIcon = 'warning';
+                    } else if (response.status === 500) {
+                        errorTitle = 'Server Error';
+                        errorText = 'Our system is temporarily unavailable. Please try again later.';
+                    }
+                    
+                    await Swal.fire({
+                        title: errorTitle,
+                        html: errorText,
+                        icon: errorIcon,
+                        confirmButtonText: 'Try Again',
+                        confirmButtonColor: '#D4A373',
+                        focusConfirm: false,
+                        allowOutsideClick: false,
+                        backdrop: `
+                            rgba(212, 163, 115, 0.1)
+                            url("/images/forbidden-icon.png")
+                            center top
+                            no-repeat
+                        `
+                    }).then(() => {
+                        document.getElementById('password').value = '';
+                        document.getElementById('password').focus();
+                    });
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Server connection failed',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    confirmButtonColor: '#D4A373'
+                });
+            } finally {
+                document.getElementById('loadingSpinner').classList.add('hidden');
+            }
+        };
+        
+        // Background image error handling
+        document.addEventListener('DOMContentLoaded', function() {
+            const bgImage = new Image();
+            bgImage.src = './assets/images/Login.Jpeg';
+            
+            bgImage.onerror = function() {
+                console.error('Background image failed to load');
+                document.body.style.backgroundColor = '#D4A373';
+            };
+        });
+    </script>
+    
+    <script src="./assets/js/BaseUrl.js"></script>
+    <script src="./assets/js/tokenValidator.js"></script>
+</body>
+</html>

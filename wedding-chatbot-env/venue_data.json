@@ -1,0 +1,150 @@
+[
+  {
+    "id": 1,
+    "name": "Emerald Palace",
+    "location": "Downtown",
+    "capacity": 300,
+    "description": "Elegant modern hall",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Golden AXE",
+        "price": "500.00",
+        "type": "fixed"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Royal Garden",
+    "location": "Uptown",
+    "capacity": 500,
+    "description": "Luxury with outdoor space",
+    "base_price": "100.00",
+    "services": []
+  },
+  {
+    "id": 3,
+    "name": "Sunset Venue",
+    "location": "Beachfront",
+    "capacity": 200,
+    "description": "Scenic beachside weddings",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Fake invited Croud to look popular",
+        "price": "1000.00",
+        "type": "fixed"
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Crystal Ballroom",
+    "location": "Financial District",
+    "capacity": 400,
+    "description": "Grand crystal chandeliers",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Premium Catering",
+        "price": "75.00",
+        "type": "per person"
+      },
+      {
+        "name": "Floral Arrangements",
+        "price": "500.00",
+        "type": "fixed"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Golden Gate Venue",
+    "location": "Harbor Front",
+    "capacity": 350,
+    "description": "Panoramic water views",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Live Band",
+        "price": "1200.00",
+        "type": "fixed"
+      },
+      {
+        "name": "Photography Package",
+        "price": "800.00",
+        "type": "fixed"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Sapphire Pavilion",
+    "location": "Historic District",
+    "capacity": 250,
+    "description": "Victorian architecture",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Vintage Decor",
+        "price": "350.00",
+        "type": "fixed"
+      },
+      {
+        "name": "Dessert Bar",
+        "price": "12.00",
+        "type": "per person"
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Ivory Tower Hall",
+    "location": "University Area",
+    "capacity": 500,
+    "description": "Academic elegance",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Lighting Effects",
+        "price": "700.00",
+        "type": "fixed"
+      },
+      {
+        "name": "Custom Cake",
+        "price": "400.00",
+        "type": "fixed"
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Azure Gardens",
+    "location": "Riverside",
+    "capacity": 300,
+    "description": "Floral paradise",
+    "base_price": "100.00",
+    "services": [
+      {
+        "name": "Valet Service",
+        "price": "8.00",
+        "type": "per person"
+      },
+      {
+        "name": "toast",
+        "price": "10.00",
+        "type": "per person"
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "yuusha",
+    "location": "123456",
+    "capacity": 400,
+    "description": "Elegant modern hall0",
+    "base_price": "100.00",
+    "services": []
+  }
+]
