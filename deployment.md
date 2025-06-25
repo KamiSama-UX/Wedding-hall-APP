@@ -73,7 +73,7 @@ Wedding Halls Booking System
 يعمل الخادم على: http://localhost:6000
 
 4.  أنشئ ملف `.env` بناءً على `.env`، وقم بتعيين:
-DEEPSEEK_API_KEY=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
+DEEPSEEK_API_KEY=DEEPSEEK_API_KEY=your_api_key_here
 ----------------------------
 3. Frontend (ملفات ثابتة)
 ----------------------------
