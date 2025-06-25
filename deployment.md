@@ -8,6 +8,7 @@ Wedding Halls Booking System
 1.  Backend (Node.js + Express)
 2.  Python Chatbot
 3.  Frontend (Static HTML + http-server)
+4. Flutter App (الواجهة الرئيسية)
 
 ----------------------------
 1. Backend (Node.js)
@@ -94,6 +95,69 @@ DEEPSEEK_API_KEY=sk-or-v1-24a912dfedceedba16a3d8ba5fa05a83c736858cd9aa820025f813
 
 واجهة المستخدم متاحة على:
    http://localhost:8080/login.html
+
+   ----------------------------
+4. تطبيق Flutter
+----------------------------
+
+المسار: ./wedding_halls_flutter
+
+المتطلبات:
+- Flutter SDK (الإصدار 3.22 أو أحدث)
+- Android Studio / Xcode (للتشغيل)
+
+الإعداد:
+1. أنشئ ملف .env في مجلد المشروع:
+   BACKEND_BASE_URL=http://localhost:5000
+   CHATBOT_URL=http://localhost:6000/chat
+   DEEPSEEK_API_KEY=your_key_here
+
+2. تثبيت التبعيات:
+   flutter pub get
+
+3. تشغيل التطبيق:
+   flutter run
+
+لنظام Android:
+   - سيستخدم المنفذ 5554 أو 5555
+
+لنظام iOS:
+   - سيستخدم المنفذ المحدد في المحاكي
+
+----------------------------
+تعديلات ضرورية على الـ Backend
+----------------------------
+1. تحديث CORS في backend/index.js:
+   app.use(cors({
+     origin: [
+       'http://localhost:8080', 
+       'http://localhost:5554',
+       'http://localhost:5555'
+     ],
+     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+     credentials: true
+   }));
+
+2. إضافة منافذ Flutter إلى قائمة السماح:
+   - Android: 5554-5555
+   - iOS: منفذ المحاكي (عادة 12345)
+
+----------------------------
+ملاحظات هامة للتكامل
+----------------------------
+1. سيتواصل تطبيق Flutter مع:
+   - Node.js Backend: لإدارة المستخدمين والحجوزات
+   - Python Chatbot: للرد على استفسارات القاعات
+
+2. تم استبدال نظام إدارة الحالة:
+   - بدلاً من localStorage في الويب، نستخدم shared_preferences
+
+3. هيكل API:
+   - يجب أن تكون نقاط النهاية متطابقة مع الواجهة الأمامية الأصلية
+
+4. إدارة التوكن:
+   - يتم تخزين JWT باستخدام shared_preferences
+   - يُرسل مع كل طلب في رأس Authorization
 
 ----------------------------
 ملاحظات هامة
