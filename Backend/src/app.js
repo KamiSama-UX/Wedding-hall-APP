@@ -34,13 +34,15 @@ app.use('/api/halls', hallRoutes);
 app.use('/uploads', express.static('public/uploads'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/api/Chat', ChatRoutes);
-app.use(
-  cors({
-    // process.env.FRONTEND_URL || 'http://localhost:5500',
-    origin: "*", // front end host and port
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: [
+    'http://localhost:8080', 
+    'http://localhost:5554',
+    'http://localhost:5555'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  credentials: true
+}));
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST, put, patch, delete");
