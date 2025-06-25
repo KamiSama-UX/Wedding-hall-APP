@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "473dbcdf-207e-4a5c-8073-4c82780b9007",
+		"name": "chat bot test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32224245"
+	},
+	"item": [
+		{
+			"name": "massaging",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDI4NjI1NywiZXhwIjoxNzUwMjg5ODU3fQ.a2B3uLpaioHG95A1wbICUGUMEN8OXuvfxpjE2XPh2Sc"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"Tell me about Azure Gardens\"}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:5000/api/chat/B"
+			},
+			"response": []
+		},
+		{
+			"name": "cache",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDI4NjI1NywiZXhwIjoxNzUwMjg5ODU3fQ.a2B3uLpaioHG95A1wbICUGUMEN8OXuvfxpjE2XPh2Sc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/api/Chat/cache-status"
+			},
+			"response": []
+		},
+		{
+			"name": "DeepSeekChatBot",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDI4NjI1NywiZXhwIjoxNzUwMjg5ODU3fQ.a2B3uLpaioHG95A1wbICUGUMEN8OXuvfxpjE2XPh2Sc"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"message\": \"Tell me about Azure Gardens\"}\r\n"
+				},
+				"url": "http://localhost:6000/chat"
+			},
+			"response": []
+		}
+	]
+}

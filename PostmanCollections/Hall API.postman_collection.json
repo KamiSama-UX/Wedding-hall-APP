@@ -1,0 +1,357 @@
+{
+	"info": {
+		"_postman_id": "6b0738bc-abde-4b06-b7c8-435b68e956da",
+		"name": "Hall API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32224245"
+	},
+	"item": [
+		{
+			"name": "Get All Halls (Public)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "{{baseUrl}}/api/halls/all"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Halls (Admin)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{adminToken}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/halls"
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Halls (Sub-admin)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{subAdminToken}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/halls/my-halls"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Hall by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Trend",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDI4NjI1NywiZXhwIjoxNzUwMjg5ODU3fQ.a2B3uLpaioHG95A1wbICUGUMEN8OXuvfxpjE2XPh2Sc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/api/halls/Trend/halls"
+			},
+			"response": []
+		},
+		{
+			"name": "Top",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDI4NjI1NywiZXhwIjoxNzUwMjg5ODU3fQ.a2B3uLpaioHG95A1wbICUGUMEN8OXuvfxpjE2XPh2Sc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:5000/api/halls/Top/halls"
+			},
+			"response": []
+		},
+		{
+			"name": "availability MAP",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTQsInJvbGUiOiJjdXN0b21lciIsInRva2VuX3ZlcnNpb24iOjAsImlhdCI6MTc1MDUyMjczMSwiZXhwIjoxNzUwNTI2MzMxfQ.zmvOSywCngPpgbbrnVmFIgpZJsJAGn7BO-sGBYQ8Mss"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{customerToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"hall_id\": 10\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseUrl}}/api/halls/availability"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Hall (Admin)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{adminToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Dream Palace\",\n  \"location\": \"City Center\",\n  \"capacity\": 300,\n  \"description\": \"A grand venue for special occasions\",\n  \"sub_admin_id\": 2\n}"
+				},
+				"url": "{{baseUrl}}/api/halls"
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Hall",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Updated Hall\",\n  \"location\": \"New Area\",\n  \"capacity\": 350,\n  \"description\": \"Recently renovated hall\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Hall",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{adminToken}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload Photo to Hall",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "photo",
+							"value": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:hallId/photos",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":hallId",
+						"photos"
+					],
+					"variable": [
+						{
+							"key": "hallId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set Cover Photo",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:hallId/photos/:photoId/cover",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":hallId",
+						"photos",
+						":photoId",
+						"cover"
+					],
+					"variable": [
+						{
+							"key": "hallId",
+							"value": ""
+						},
+						{
+							"key": "photoId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Hall Photo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/halls/:hallId/photos/:photoId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"halls",
+						":hallId",
+						"photos",
+						":photoId"
+					],
+					"variable": [
+						{
+							"key": "hallId",
+							"value": ""
+						},
+						{
+							"key": "photoId",
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "adminToken",
+			"value": ""
+		},
+		{
+			"key": "subAdminToken",
+			"value": ""
+		}
+	]
+}

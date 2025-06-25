@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "d31dac68-0318-4e9d-a1c0-91111fed9153",
+		"name": "Wedding Hall Auth API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32224245"
+	},
+	"item": [
+		{
+			"name": "Register (Customer)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/register",
+				"description": "Registers a new customer and sends email OTP."
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/login",
+				"description": "Logs in a verified user and returns JWT token."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Current User",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/auth/me",
+				"description": "Returns the logged-in user's info."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Admin/Sub-admin (Admin only)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{adminToken}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"string\",\n  \"email\": \"string\",\n  \"password\": \"string\",\n  \"role\": \"admin | sub_admin\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/admin/create",
+				"description": "Creates a new admin or sub-admin."
+			},
+			"response": []
+		},
+		{
+			"name": "Login With Token",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/auth/token-login",
+				"description": "Fetches user info from provided token."
+			},
+			"response": []
+		},
+		{
+			"name": "Resend Email Verification OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/resend-otp",
+				"description": "Resends email verification OTP."
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Email with OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\",\n  \"code\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/verify-email-otp",
+				"description": "Verifies email using OTP."
+			},
+			"response": []
+		},
+		{
+			"name": "Send Password Reset OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/reset/send-otp",
+				"description": "Sends OTP for password reset."
+			},
+			"response": []
+		},
+		{
+			"name": "Verify Password Reset OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\",\n  \"code\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/reset/verify-otp",
+				"description": "Verifies OTP sent for password reset."
+			},
+			"response": []
+		},
+		{
+			"name": "Reset Password with OTP",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"string\",\n  \"newPassword\": \"string\"\n}"
+				},
+				"url": "{{baseUrl}}/api/auth/reset-password",
+				"description": "Resets the password using OTP."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "adminToken",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "d71103e8-212a-4156-9bab-d57ce12d5e41",
+		"name": "Customer API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "32224245"
+	},
+	"item": [
+		{
+			"name": "Get Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/customer/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Profile",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Jane Updated\",\n  \"email\": \"updated@example.com\"\n}"
+				},
+				"url": "{{baseUrl}}/api/customer/profile"
+			},
+			"response": []
+		},
+		{
+			"name": "Change Password",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"currentPassword\": \"oldPassword123\",\n  \"newPassword\": \"newSecurePass!45\"\n}"
+				},
+				"url": "{{baseUrl}}/api/customer/change-password"
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Bookings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": "{{baseUrl}}/api/customer/bookings"
+			},
+			"response": []
+		},
+		{
+			"name": "Get My Bookings (Filtered)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/customer/my-bookings?status=confirmed&from=2025-06-01&to=2025-06-30",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"my-bookings"
+					],
+					"query": [
+						{
+							"key": "status",
+							"value": "confirmed"
+						},
+						{
+							"key": "from",
+							"value": "2025-06-01"
+						},
+						{
+							"key": "to",
+							"value": "2025-06-30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Favorites",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/customer/favorites?page=1&limit=10",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"favorites"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "limit",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Hall to Favorites",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/customer/favorites/:hallId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"favorites",
+						":hallId"
+					],
+					"variable": [
+						{
+							"key": "hallId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Hall from Favorites",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/api/customer/favorites/:hallId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"customer",
+						"favorites",
+						":hallId"
+					],
+					"variable": [
+						{
+							"key": "hallId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000"
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
