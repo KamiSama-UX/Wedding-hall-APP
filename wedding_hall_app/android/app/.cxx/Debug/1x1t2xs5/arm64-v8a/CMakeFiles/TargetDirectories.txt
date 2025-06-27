@@ -1,0 +1,2 @@
+C:/Users/DELL/StudioProjects/wedding_hall_app/android/app/.cxx/Debug/1x1t2xs5/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/DELL/StudioProjects/wedding_hall_app/android/app/.cxx/Debug/1x1t2xs5/arm64-v8a/CMakeFiles/rebuild_cache.dir
