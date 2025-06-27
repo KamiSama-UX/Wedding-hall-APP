@@ -35,7 +35,7 @@ venv/
 *.sqlite3
 env/
 venv/
-lib/
+wedding-chatbot-env/lib/
 Scripts/
 bin/
 Include/
