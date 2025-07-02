@@ -18,13 +18,11 @@ A smart wedding hall booking system with admin dashboard, mobile app, and AI cha
 - Chatbot: Python + OpenRouter + Flask
 - Security: JWT, input validation, SQL injection protection
 
-## License
-
-This project is licensed under the MIT License © 2025 KamiSama-UX.
-
 # wedding_hall_app
 
-# Flutter project.
+A new Flutter project.
+
+## Getting Started
 
 This project is a starting point for a Flutter application.
 
@@ -36,3 +34,8 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+
+## License
+
+This project is licensed under the MIT License © 2025 KamiSama-UX.

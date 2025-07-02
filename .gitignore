@@ -148,3 +148,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+!wedding_hall_app/android/app/
+!wedding_hall_app/android/app/src/
+!wedding_hall_app/android/app/build.gradle
+!wedding_hall_app/android/app/proguard-rules.pro
+!wedding_hall_app/android/app/gradle.properties

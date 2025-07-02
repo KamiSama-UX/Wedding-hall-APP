@@ -111,7 +111,7 @@ exports.getAllHalls = async (userId = null, role = null) => {
     const cover = photos.find(p => p.is_cover) || photos[0];
 
     hall.cover_photo = cover
-      ? `${process.env.BACKEND_URL}${cover.photo_url}`
+      ? `${cover.photo_url}`
       : null;
     hall.photos = photos.map(p => ({
       id: p.id,
@@ -189,7 +189,7 @@ exports.getHallDetails = async (hallId) => {
   return {
     ...hall,
     cover_photo: cover
-      ? `${process.env.BACKEND_URL}${cover.photo_url}`
+      ? `${cover.photo_url}`
       : null,
     photos: photos.map(p => ({
       id: p.id,
@@ -260,7 +260,7 @@ async function enrichHalls(halls) {
         cover_photo: cover ? `${process.env.BACKEND_URL}${cover.photo_url}` : null,
         photos: photos.map(p => ({
           id: p.id,
-          url: `${process.env.BACKEND_URL}${p.photo_url}`,
+          url: `${p.photo_url}`,
           is_cover: !!p.is_cover,
           imageName:`${p.photo_url}`,
         }))
