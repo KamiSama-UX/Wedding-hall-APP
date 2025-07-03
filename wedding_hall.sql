@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 23, 2025 at 09:09 PM
+-- Generation Time: Jul 03, 2025 at 10:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,7 +60,9 @@ INSERT INTO `bookings` (`id`, `customer_id`, `hall_id`, `guest_count`, `event_da
 (19, 14, 10, 100, '2025-07-09', 'confirmed', '2025-06-21 19:29:52', '2025-06-23 20:05:47', '18:00:00'),
 (20, 14, 10, 100, '2025-07-11', 'pending', '2025-06-21 19:33:20', '2025-06-21 19:33:20', '18:00:00'),
 (21, 14, 10, 100, '2025-07-21', 'declined', '2025-06-21 19:41:03', '2025-06-23 20:05:41', '18:00:00'),
-(22, 14, 10, 100, '2025-07-01', 'confirmed', '2025-06-21 19:44:57', '2025-06-21 19:46:29', '18:00:00');
+(22, 14, 10, 100, '2025-07-01', 'confirmed', '2025-06-21 19:44:57', '2025-06-21 19:46:29', '18:00:00'),
+(30, 12, 1, 100, '2025-07-15', 'pending', '2025-07-03 22:26:10', '2025-07-03 22:26:10', '18:00:00'),
+(31, 12, 1, 100, '2025-07-30', 'pending', '2025-07-03 22:54:15', '2025-07-03 22:54:15', '18:00:00');
 
 -- --------------------------------------------------------
 
@@ -95,7 +97,10 @@ INSERT INTO `booking_services` (`id`, `booking_id`, `service_id`, `price_at_book
 (17, 19, 34, 350.00),
 (18, 20, 34, 350.00),
 (19, 21, 34, 350.00),
-(20, 22, 34, 350.00);
+(20, 22, 34, 350.00),
+(21, 30, 42, 500.00),
+(22, 31, 9, 10000.00),
+(23, 31, 42, 500.00);
 
 -- --------------------------------------------------------
 
@@ -228,7 +233,7 @@ INSERT INTO `logs` (`id`, `actor_id`, `action`, `target_type`, `target_id`, `des
 CREATE TABLE `notifications` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `type` enum('booking','system') DEFAULT 'booking',
+  `type` enum('booking','system','booking_confirmation','new_booking') DEFAULT 'booking',
   `message` text NOT NULL,
   `related_booking_id` int(11) DEFAULT NULL,
   `is_read` tinyint(1) DEFAULT 0,
@@ -253,7 +258,11 @@ INSERT INTO `notifications` (`id`, `user_id`, `type`, `message`, `related_bookin
 (11, 14, '', 'Booking #21 for 2025-07-21 at 18:00 is pending', 21, 0, '2025-06-21 19:41:03'),
 (12, 3, '', 'New booking #21 for Hall 10 on 2025-07-21 at 18:00', 21, 0, '2025-06-21 19:41:03'),
 (13, 14, '', 'Booking #22 for 2025-07-01 at 18:00 is pending', 22, 0, '2025-06-21 19:44:57'),
-(14, 3, '', 'New booking #22 for Hall 10 on 2025-07-01 at 18:00', 22, 0, '2025-06-21 19:44:57');
+(14, 3, '', 'New booking #22 for Hall 10 on 2025-07-01 at 18:00', 22, 0, '2025-06-21 19:44:57'),
+(15, 12, '', 'Booking #30 for 2025-07-15 at 18:00 is pending', 30, 0, '2025-07-03 22:26:10'),
+(16, 2, '', 'New booking #30 for Hall 1 on 2025-07-15 at 18:00', 30, 0, '2025-07-03 22:26:10'),
+(17, 12, '', 'Booking #31 for 2025-07-30 at 18:00 is pending', 31, 0, '2025-07-03 22:54:15'),
+(18, 2, '', 'New booking #31 for Hall 1 on 2025-07-30 at 18:00', 31, 0, '2025-07-03 22:54:15');
 
 -- --------------------------------------------------------
 
@@ -538,13 +547,13 @@ ALTER TABLE `wedding_halls`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `booking_services`
 --
 ALTER TABLE `booking_services`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `email_verification_codes`
@@ -568,7 +577,7 @@ ALTER TABLE `logs`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `password_reset_codes`
