@@ -18,6 +18,10 @@ import '../../features/home/reservation/view/cubit/reservation_cubit.dart';
 import '../../features/home/reservation/view/cubit/reservation_ui_cubit.dart';
 import '../networking/api_service.dart';
 import '../networking/dio_factory.dart';
+import 'package:dio/dio.dart';
+import '../../features/chat_ai/data/repo/chat_ai_repository_impl.dart';
+import '../../features/chat_ai/domain/usecases/send_message.dart';
+import '../../features/chat_ai/view/cubit/chat_ai_cubit.dart';
 
 final getIt = GetIt.instance;
 
@@ -43,4 +47,10 @@ Future<void> setupGetIt() async {
   getIt.registerLazySingleton(() => ReservationRepo(getIt()));
   getIt.registerFactory(() => ReservationCubit(getIt()));
   getIt.registerFactory(() => CreateReservationCubit(getIt()));
+  
 }
+final dio = Dio();
+
+final chatRepository = ChatAiRepositoryImpl(dio);
+final sendMessageUseCase = SendMessage(chatRepository);
+final chatAiCubit = ChatAiCubit(sendMessageUseCase);
