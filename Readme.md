@@ -1,5 +1,13 @@
 # Wedding Halls Booking System
-
+Wedding-hall-APP/
+├── LICENSE          # MIT License file
+├── backend/
+├── wedding-chatbot-env/
+├── frontend/
+├── wedding_halls_flutter/
+├── deployment.md   
+└── README.md       
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 A smart wedding hall booking system with admin dashboard, mobile app, and AI chatbot support. Built with Node.js, Express, MySQL, and Flutter.
 
 ## Features
